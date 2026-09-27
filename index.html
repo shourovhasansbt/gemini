@@ -1,1 +1,794 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Gemini AI Pro — মাত্র ২৫০ টাকায়</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #080B18;
+    --surface: #0F1424;
+    --surface2: #161C32;
+    --accent: #4A8CFF;
+    --accent2: #A259FF;
+    --grad: linear-gradient(135deg, #4A8CFF 0%, #A259FF 100%);
+    --grad2: linear-gradient(135deg, #1a2a6c, #4A8CFF 60%, #A259FF);
+    --text: #F0F4FF;
+    --muted: #8A94B2;
+    --border: rgba(74, 140, 255, 0.18);
+    --card: rgba(15, 20, 36, 0.95);
+    --green: #22C55E;
+    --bkash: #E40066;
+    --nagad: #F05A28;
+    --upay: #7B2D8B;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background stars effect */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(74,140,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(162,89,255,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(8,11,24,0.88);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -.01em;
+  }
+
+  .nav-brand svg { width: 28px; height: 28px; }
+
+  .nav-badge {
+    background: var(--grad);
+    font-size: .72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .02em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74,140,255,0.12);
+    border: 1px solid rgba(74,140,255,0.3);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #82AEFF;
+    margin-bottom: 28px;
+    letter-spacing: .02em;
+  }
+
+  .hero-label::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: #4AFF91;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4AFF91;
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    margin-bottom: 16px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+
+  /* ── PRODUCT IMAGE CARD ── */
+  .product-img-wrap {
+    position: relative;
+    margin: 0 auto 48px;
+    max-width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 60px rgba(74,140,255,0.15), 0 0 100px rgba(162,89,255,0.1);
+  }
+
+  .product-img-wrap img {
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+  }
+
+  .product-img-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(8,11,24,0.9) 0%, transparent 100%);
+    border-radius: 0 0 20px 20px;
+  }
+
+  /* ── PRICING CARD ── */
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    text-align: center;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad);
+  }
+
+  .price-strike {
+    font-size: .9rem;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin-bottom: 6px;
+  }
+
+  .price-main {
+    font-size: clamp(3.2rem, 10vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.04em;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .price-suffix {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .price-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .feat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .9rem;
+  }
+
+  .feat-row .check {
+    width: 22px; height: 22px;
+    background: rgba(74,255,145,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: #4AFF91;
+    font-size: .75rem;
+    font-weight: 800;
+  }
+
+  /* ── PAYMENT METHODS ── */
+  .section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: .04em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-size: .78rem;
+  }
+
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .pay-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 12px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .pay-card:hover { border-color: rgba(74,140,255,0.4); transform: translateY(-2px); }
+
+  .pay-card .pay-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 0 auto 10px;
+  }
+
+  .pay-card.bkash .pay-icon { background: rgba(228,0,102,0.15); color: var(--bkash); }
+  .pay-card.nagad .pay-icon { background: rgba(240,90,40,0.15); color: var(--nagad); }
+  .pay-card.upay .pay-icon { background: rgba(123,45,139,0.15); color: var(--upay); }
+
+  .pay-card .pay-name {
+    font-size: .85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .pay-card .pay-num {
+    font-size: .78rem;
+    color: var(--muted);
+    word-break: break-all;
+    font-weight: 600;
+  }
+
+  .pay-confirm {
+    display: inline-block;
+    font-size: .7rem;
+    background: rgba(34,197,94,0.15);
+    color: var(--green);
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+
+  /* ── ORDER FORM ── */
+  .order-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .order-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+
+  .order-card h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -.02em;
+  }
+
+  .order-card .sub {
+    color: var(--muted);
+    font-size: .88rem;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .field label {
+    display: block;
+    font-size: .82rem;
+    font-weight: 600;
+    color: #9AAEFF;
+    margin-bottom: 7px;
+    letter-spacing: .01em;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1.5px solid rgba(74,140,255,0.2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: inherit;
+    font-size: .93rem;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    resize: none;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder { color: rgba(138,148,178,0.5); }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74,140,255,0.12);
+  }
+
+  /* WhatsApp input */
+  .wa-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .wa-icon {
+    position: absolute;
+    left: 14px;
+    color: #25D366;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .wa-input-wrap input {
+    padding-left: 40px !important;
+  }
+
+  /* screenshot upload */
+  .upload-box {
+    border: 2px dashed rgba(74,140,255,0.25);
+    border-radius: var(--radius-sm);
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    position: relative;
+    background: var(--surface2);
+  }
+
+  .upload-box:hover { border-color: var(--accent); background: rgba(74,140,255,0.05); }
+
+  .upload-box input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer;
+    width: 100%; height: 100%;
+  }
+
+  .upload-box .upload-icon { font-size: 2rem; margin-bottom: 8px; }
+
+  .upload-box p {
+    font-size: .85rem;
+    color: var(--muted);
+  }
+
+  .upload-box .upload-hint {
+    font-size: .75rem;
+    color: rgba(138,148,178,0.5);
+    margin-top: 4px;
+  }
+
+  #preview-img {
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 8px;
+    margin-top: 12px;
+    display: none;
+    object-fit: contain;
+  }
+
+  /* submit button */
+  .btn-order {
+    width: 100%;
+    padding: 16px;
+    background: var(--grad);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: -.01em;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 24px rgba(74,140,255,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-order:hover:not(:disabled) {
+    opacity: .92;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(74,140,255,0.4);
+  }
+
+  .btn-order:active:not(:disabled) { transform: translateY(0); }
+
+  .btn-order:disabled { opacity: .6; cursor: not-allowed; }
+
+  /* toast / status */
+  .toast {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    font-size: .9rem;
+    font-weight: 600;
+    margin-top: 16px;
+  }
+
+  .toast.success { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #6EE7A0; }
+  .toast.error { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #FCA5A5; }
+  .toast.show { display: flex; }
+
+  .toast-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+  /* loading spinner in btn */
+  .spinner {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: .8rem;
+    line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 520px) {
+    .order-card, .price-card { padding: 24px 18px; }
+    .payment-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 12px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gn" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A8CFF"/>
+          <stop offset="1" stop-color="#A259FF"/>
+        </linearGradient>
+      </defs>
+      <circle cx="14" cy="14" r="13" fill="url(#gn)" opacity=".15"/>
+      <path d="M14 4 C14 4 20 9 20 14 C20 19 14 24 14 24 C14 24 8 19 8 14 C8 9 14 4 14 4Z" fill="url(#gn)" opacity=".9"/>
+      <circle cx="14" cy="14" r="3.5" fill="white"/>
+    </svg>
+    <span>Gemini Store</span>
+  </div>
+  <span class="nav-badge">২৫০ ৳</span>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">এখন অর্ডার করুন — সীমিত অফার</div>
+    <h1>Gemini AI Pro<br/>মাত্র ২৫০ টাকায়</h1>
+    <p>Google-এর সবচেয়ে শক্তিশালী AI টুল এখন বাংলাদেশে মাত্র ২৫০ টাকায়। ১২ মাসের জন্য একবারেই পেমেন্ট করুন।</p>
+
+    <div class="product-img-wrap">
+      <img src="https://static0.anpoimages.com/wordpress/wp-content/uploads/2025/10/a-robotic-hand-reaching-upward-surrounded-by-gemini-and-thumbs-down-icons-with-the-text-google-ai-pro-and-the-google-logo-above.png?q=70&fit=crop&w=1600&h=900&dpr=1"
+           alt="Gemini AI Pro"
+           onerror="this.style.display='none'"/>
+      <div class="product-img-overlay"></div>
+    </div>
+  </section>
+
+  <!-- PRICE CARD -->
+  <div class="price-card">
+    <div class="price-strike">আগে ছিল ২,৫০০ ৳/বছর</div>
+    <div class="price-main">২৫০৳</div>
+    <div class="price-suffix">একবার পেমেন্ট · ১২ মাস অ্যাক্সেস</div>
+    <div class="price-features">
+      <div class="feat-row"><span class="check">✓</span> Gemini 2.0 Flash & Pro মডেল</div>
+      <div class="feat-row"><span class="check">✓</span> আনলিমিটেড মেসেজ ও AI চ্যাট</div>
+      <div class="feat-row"><span class="check">✓</span> ইমেজ জেনারেশন (Imagen 3)</div>
+      <div class="feat-row"><span class="check">✓</span> Google Workspace ইন্টিগ্রেশন</div>
+      <div class="feat-row"><span class="check">✓</span> ১২ মাসের ফুল অ্যাক্সেস গ্যারান্টি</div>
+    </div>
+  </div>
+
+  <!-- PAYMENT METHODS -->
+  <div class="section-title">পেমেন্ট পদ্ধতি</div>
+  <div class="payment-grid">
+    <div class="pay-card bkash">
+      <div class="pay-icon">b</div>
+      <div class="pay-name">bKash</div>
+      <div class="pay-num">01983553505</div>
+      <span class="pay-confirm">✓ কনফার্মড</span>
+    </div>
+    <div class="pay-card nagad">
+      <div class="pay-icon">N</div>
+      <div class="pay-name">Nagad</div>
+      <div class="pay-num">01983553505</div>
+      <span class="pay-confirm">✓ কনফার্মড</span>
+    </div>
+    <div class="pay-card upay">
+      <div class="pay-icon">U</div>
+      <div class="pay-name">Upay</div>
+      <div class="pay-num">01983553505</div>
+      <span class="pay-confirm">✓ কনফার্মড</span>
+    </div>
+  </div>
+
+  <!-- ORDER FORM -->
+  <div class="order-card">
+    <h2>অর্ডার করুন</h2>
+    <p class="sub">নিচের ফর্মটি পূরণ করুন। পেমেন্টের পর আপনার Gmail-এ Gemini Pro অ্যাক্সেস পাঠানো হবে।</p>
+
+    <div class="field-group">
+      <div class="field">
+        <label>আপনার নাম</label>
+        <input type="text" id="cust-name" placeholder="যেমন: Shourov Mia" required/>
+      </div>
+      <div class="field">
+        <label>Gmail অ্যাড্রেস (যেখানে Gemini Pro চান)</label>
+        <input type="email" id="cust-email" placeholder="yourname@gmail.com" required/>
+      </div>
+      <div class="field">
+        <label>যোগাযোগের নম্বর</label>
+        <input type="tel" id="cust-phone" placeholder="01XXXXXXXXXX" required/>
+      </div>
+      <div class="field">
+        <label>WhatsApp নম্বর (ঐচ্ছিক)</label>
+        <div class="wa-input-wrap">
+          <span class="wa-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.1 1.523 5.824L0 24l6.335-1.508A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.006-1.371l-.36-.214-3.727.977.997-3.645-.234-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          </span>
+          <input type="tel" id="cust-wa" placeholder="01XXXXXXXXXX"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>ট্রানজেকশন (TrxID) নম্বর</label>
+        <input type="text" id="cust-trxid" placeholder="যেমন: 8GHF2K9XTR" required/>
+      </div>
+      <div class="field">
+        <label>পেমেন্টের স্ক্রিনশট (প্রমাণ)</label>
+        <div class="upload-box" id="upload-box">
+          <input type="file" id="screenshot" accept="image/*" onchange="previewScreenshot(this)"/>
+          <div class="upload-icon">📸</div>
+          <p>স্ক্রিনশট আপলোড করুন</p>
+          <p class="upload-hint">JPG, PNG — সর্বোচ্চ ৫ MB</p>
+          <img id="preview-img" alt="Preview"/>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-order" id="order-btn" onclick="submitOrder()">
+      অর্ডার কনফার্ম করুন →
+    </button>
+
+    <div class="toast" id="toast-success">
+      <span class="toast-icon">🎉</span>
+      <span id="toast-msg">অর্ডার সফলভাবে পাঠানো হয়েছে! শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।</span>
+    </div>
+    <div class="toast" id="toast-error">
+      <span class="toast-icon">⚠️</span>
+      <span id="toast-err-msg">কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।</span>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>© 2025 Gemini Store · Powered by Google Gemini</p>
+  <p style="margin-top:6px;">অর্ডার করার পর সর্বোচ্চ ২৪ ঘণ্টার মধ্যে অ্যাক্সেস দেওয়া হবে।</p>
+</footer>
+
+<script>
+  // ── CONFIG ──
+  const BOT_TOKEN = '8899356295:AAF0zqxArAv_jIv2-XpVnY-MXImtp9BsuGc';
+  const CHAT_ID   = '-1003730152029';
+
+  function previewScreenshot(input) {
+    const file = input.files[0];
+    const img  = document.getElementById('preview-img');
+    const box  = document.getElementById('upload-box');
+    if (!file) { img.style.display = 'none'; return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      img.src = e.target.result;
+      img.style.display = 'block';
+      box.querySelector('p').textContent = file.name;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function showToast(type, msg) {
+    ['toast-success', 'toast-error'].forEach(id => {
+      document.getElementById(id).classList.remove('show');
+    });
+    if (type === 'success') {
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-success').classList.add('show');
+    } else {
+      document.getElementById('toast-err-msg').textContent = msg;
+      document.getElementById('toast-error').classList.add('show');
+    }
+    setTimeout(() => {
+      document.getElementById(type === 'success' ? 'toast-success' : 'toast-error')
+              .classList.remove('show');
+    }, 8000);
+  }
+
+  function setLoading(loading) {
+    const btn = document.getElementById('order-btn');
+    btn.disabled = loading;
+    btn.innerHTML = loading
+      ? '<span class="spinner"></span> পাঠানো হচ্ছে...'
+      : 'অর্ডার কনফার্ম করুন →';
+  }
+
+  async function toBase64(file) {
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload  = () => res(r.result.split(',')[1]);
+      r.onerror = () => rej(r.error);
+      r.readAsDataURL(file);
+    });
+  }
+
+  async function submitOrder() {
+    const name   = document.getElementById('cust-name').value.trim();
+    const email  = document.getElementById('cust-email').value.trim();
+    const phone  = document.getElementById('cust-phone').value.trim();
+    const wa     = document.getElementById('cust-wa').value.trim();
+    const trxid  = document.getElementById('cust-trxid').value.trim();
+    const file   = document.getElementById('screenshot').files[0];
+
+    // Basic validation
+    if (!name)  { showToast('error', 'নাম লিখুন।'); return; }
+    if (!email || !email.includes('@')) { showToast('error', 'সঠিক Gmail অ্যাড্রেস দিন।'); return; }
+    if (!phone) { showToast('error', 'যোগাযোগের নম্বর দিন।'); return; }
+    if (!trxid) { showToast('error', 'TrxID নম্বর লিখুন।'); return; }
+
+    setLoading(true);
+
+    // Build the Telegram message
+    const now = new Date().toLocaleString('bn-BD', { timeZone: 'Asia/Dhaka' });
+    const waLine = wa ? `\n💬 *WhatsApp:* ${wa}` : '';
+    const msg =
+`🛒 *নতুন অর্ডার — Gemini AI Pro*
+
+👤 *নাম:* ${name}
+📧 *Gmail:* ${email}
+📱 *কন্ট্যাক্ট:* ${phone}${waLine}
+🏷️ *TrxID:* \`${trxid}\`
+💰 *পরিমাণ:* ২৫০ টাকা
+📦 *প্যাকেজ:* Gemini AI Pro — ১২ মাস
+🕐 *সময়:* ${now}`;
+
+    const telegramBase = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+    try {
+      // 1. Send text message
+      const textResp = await fetch(`${telegramBase}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id:    CHAT_ID,
+          text:       msg,
+          parse_mode: 'Markdown'
+        })
+      });
+      const textData = await textResp.json();
+
+      if (!textData.ok) throw new Error(textData.description || 'Message send failed');
+
+      // 2. Send screenshot photo if provided
+      if (file) {
+        const formData = new FormData();
+        formData.append('chat_id', CHAT_ID);
+        formData.append('photo', file);
+        formData.append('caption', `📸 ${name}-এর পেমেন্ট স্ক্রিনশট | TrxID: ${trxid}`);
+
+        await fetch(`${telegramBase}/sendPhoto`, {
+          method: 'POST',
+          body: formData
+        });
+      }
+
+      // Success!
+      showToast('success', '🎉 অর্ডার সফলভাবে পাঠানো হয়েছে! শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।');
+      // Clear form
+      document.getElementById('cust-name').value  = '';
+      document.getElementById('cust-email').value = '';
+      document.getElementById('cust-phone').value = '';
+      document.getElementById('cust-wa').value    = '';
+      document.getElementById('cust-trxid').value = '';
+      document.getElementById('screenshot').value = '';
+      const img = document.getElementById('preview-img');
+      img.style.display = 'none';
+      document.querySelector('#upload-box p').textContent = 'স্ক্রিনশট আপলোড করুন';
+
+    } catch (err) {
+      console.error(err);
+      showToast('error', `সমস্যা হয়েছে: ${err.message}। ইন্টারনেট সংযোগ চেক করুন।`);
+    } finally {
+      setLoading(false);
+    }
+  }
+</script>
+</body>
+</html>
